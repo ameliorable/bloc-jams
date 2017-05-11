@@ -20,6 +20,10 @@ body {
   max-width: 64rem;
 }
 
+.container.narrow {
+  max-width: 56rem;
+}
+
 .navbar {
   position: relative;
   padding: 0.5rem;
