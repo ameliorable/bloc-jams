@@ -29,6 +29,21 @@ var albumMarconi = {
     ]
 };
 
+var albumWhitman = {
+  title: 'Leaves of Grass',
+  artist: 'Walt Whitman',
+  label: 'Poetry',
+  year: '1855',
+  albumArtUrl: 'assets/images/album_covers/02.png',
+  songs: [
+    { title: 'Song of Myself', duration: '5:15' },
+    { title: 'Song of the Open Road', duration: '3:24' },
+    { title: 'I sing the body electric', duration: '2:54' },
+    { title: 'Crossing Brooklyn Ferry', duration: '5:01' },
+    { title: 'A Word Out of the Sea', duration: '1:59' }
+  ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -41,13 +56,13 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
- var setCurrentAlbum = function(album) {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+ var setCurrentAlbum = function(album) {
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -62,4 +77,15 @@ var createSongRow = function(songNumber, songName, songLength) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+    var albumNames = [albumWhitman, albumMarconi, albumPicasso];
+    var i = 0;
+
+    window.addEventListener('click', function(event) {
+      setCurrentAlbum(albumNames[i]);
+      i++;
+      if (i >= albumNames.length) {
+        i = 0;
+      }
+    });
 };
