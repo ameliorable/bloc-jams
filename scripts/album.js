@@ -32,7 +32,7 @@ var albumMarconi = {
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number" data-song-number=" ' +songNumber + '">' + songNumber + '</td>'
+      + '  <td class="song-item-number" data-song-number=" ' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
@@ -82,8 +82,15 @@ window.onload = function() {
     });
 
     var findParentByClassName = function(element, targetClass) {
-      if (element) {
-        var currentParent= element.parentElement;
+      var currentParent = element.parentElement;
+      //moved var currentParent to top of function so it could be used more (don't repeat yourself)
+      if (currentParent === null) {
+        console.log("No parent found");
+        // so this says if there isn't anything at element.parentElement then no parent will be found.
+      } else if (currentParent.className === null) {
+        console.log("No parent found with that class name");
+        //if an element with a parent element doesn't have the specified class name, it doesn't exist and is "null"
+      } else {
         while (currentParent.className !== targetClass && currentParent.className !== null) {
           currentParent = currentParent.parentElement;
         }
@@ -113,7 +120,7 @@ window.onload = function() {
 
         var songItem = getSongItem(targetElement);
 
-        if (currrentlyPlayingSong === null) {
+        if (currentlyPlayingSong === null) {
           songItem.innerHTML = pauseButtonTemplate;
           currentlyPlayingSong = songItem.getAttribute('data-song-number');
         } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
@@ -138,7 +145,7 @@ window.onload = function() {
       });
 
       songRows[i].addEventListener('click', function(event) {
-        clickHandlerEvent(event.target);
+        clickHandler(event.target);
       });
     }
 };
