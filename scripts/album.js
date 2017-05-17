@@ -113,7 +113,7 @@ window.onload = function() {
 
         var songItem = getSongItem(targetElement);
 
-        if (currrentlyPlayingSong === null) {
+        if (currentlyPlayingSong === null) {
           songItem.innerHTML = pauseButtonTemplate;
           currentlyPlayingSong = songItem.getAttribute('data-song-number');
         } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
@@ -138,7 +138,7 @@ window.onload = function() {
       });
 
       songRows[i].addEventListener('click', function(event) {
-        clickHandlerEvent(event.target);
+        clickHandler(event.target);
       });
     }
 };
