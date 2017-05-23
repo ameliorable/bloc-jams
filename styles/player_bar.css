@@ -120,7 +120,7 @@
     border-radius: 50%;
     cursor: pointer;
     -webkit-transition: all 100ms ease-in-out;
-        moz-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
             transition: all 100ms ease-in-out;
 }
 
