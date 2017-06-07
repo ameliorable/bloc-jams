@@ -182,6 +182,35 @@ var updatePlayerBarSong = function() {
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
   $('.main-controls .play-pause').html(playerBarPauseButton);
 }
+// assignment 20 work below
+// if a song is paused and the play button is clicked in the player bar:
+// change the song number cell from play to pause button,
+// change the html of the player bar's play button to pause button and
+// play the song
+// if the song is playing(current sound file exists) and the pause button is clicked:
+// change the song number cell from a pause button to a play button
+//change the html of the player bar's pause button to a play button and
+// pause the song
+// if (currentSoundFile.isPaused()) {
+//   $(this).html(pauseButtonTemplate);
+//   $('.main-controls .play-pause').html(playerBarPauseButton);
+//   currentSoundFile.play();
+// } else {
+//   $(this).html(playButtonTemplate);
+//   $('.main-controls .play-pause').html(playerBarPlayButton);
+//   currentSoundFile.pause();
+
+var toggleFromPlayerBar = function() {
+  if (currentSoundFile.isPaused()) {
+    $(this).html(pauseButtonTemplate);
+    $('.main-controls .play-pause').html(playerBarPauseButton);
+    currentSoundFile.play();
+  } else {
+    $(this).html(playButtonTemplate);
+    $('.main-controls .play-pause').html(playerBarPlayButton);
+    currentSoundFile.pause();
+  }
+}
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
@@ -196,9 +225,14 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+// assignment 20 variable
+var $mainControls = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    // line below: assignment 20 variable: a variable to hold the "$('.main-controls .play-pause')" selector
+    // add a click event with toggleFromPlayerBar() as the event handler
+    $mainControls.click(toggleFromPlayerBar);
 });
