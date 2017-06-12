@@ -21,7 +21,27 @@ var setVolume = function(volume) {
     currentSoundFile.setVolume(volume);
   }
 };
+// assignment 21, part 1
+// did I wrap the filterTimeCode function properly?
+var setCurrentTimeInPlayerBar = function(currentTime)  {
+  $('.current-time').text(filterTimeCode(currentTime));
+}
+// assignment 21, part 2
+var setTotalTimeInPlayerBar = function(totalTime) {
+  $('.total-time').text(filterTimeCode(totalTime));
+}
+// assignment 21, part 3
+// this works properly in the main body/not the player bar
+var filterTimeCode = function(timeInSeconds) {
+  parseFloat(timeInSeconds);
+  var wholeMinutes = Math.floor(timeInSeconds / 60);
+  var wholeSeconds = Math.floor(timeInSeconds - (wholeMinutes * 60));
+  if (wholeSeconds < 10) {
+    wholeSeconds = "0" + wholeSeconds;
+  }
+  return (wholeMinutes + ":" + wholeSeconds);
 
+}
 var getSongNumberCell = function(number) {
   return $('.song-item-number[data-song-number="' + number + '"]');
 }
@@ -31,7 +51,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -129,6 +149,9 @@ var updateSeekBarWhileSongPlays = function() {
       var $seekBar = $('.seek-control .seek-bar');
 
       updateSeekPercentage($seekBar, seekBarFillRatio);
+      // assignment 21, part 1
+      // why isn't the time formatting correctly? not adjusting to "X:XX"
+      setCurrentTimeInPlayerBar(this.getTime());
     });
   }
 };
@@ -255,6 +278,10 @@ var updatePlayerBarSong = function() {
   $('.currently-playing .artist-name').text(currentAlbum.artist);
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
   $('.main-controls .play-pause').html(playerBarPauseButton);
+  // assignment 21, part 2
+  // what argument should I be passing in to "setTotalTimeInPlayerBar"? I know I want the song's total duration, but I'm not sure what to pass in to get that
+  setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
+  // console.log(currentSongFromAlbum);
 }
 // assignment 20 work below
 // if a song is paused and the play button is clicked in the player bar:
